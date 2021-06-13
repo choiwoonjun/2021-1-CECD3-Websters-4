@@ -1,6 +1,6 @@
 # [React Reduction - Free Admin Template Built with React and Bootstrap4](https://github.com/CSID-DGU/2021-1-CECD3-Websters-4.git/)
 
-![React Reduction](public/img/screenshots/reduction-admin.jpg?raw=true 'React Reduction')
+
 
 ## Preview
 
