@@ -7,9 +7,9 @@ router.post('/:meetingId',(req,res)=>{
 })
 router.get('/:meetingId',async (req,res)=>{
     const meetingId=req.params.meetingId
-    const transcription=await getTranscriptionJob('111')
-    editTranscription(transcription)
-    res.send(200)
+    const paths=await getTranscriptionJob('111')
+    editTranscription(paths)
+    res.json({})
 })
 
 module.exports=router
