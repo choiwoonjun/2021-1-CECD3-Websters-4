@@ -1,4 +1,0 @@
-AWS Access Key ID [****************4DWT]: AKIAQ5JO5LRXVQ4T4DWT
-AWS Secret Access Key [****************CzC9]: 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
-Default region name [ap-northeas-2]: ap-northeast-2
-Default output format [text]: text
