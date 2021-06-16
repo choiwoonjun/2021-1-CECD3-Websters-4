@@ -5,14 +5,14 @@ import transcription from './datas/edit.json'
 function MeetingLog() {
     const [Info, setInfo] = useState({})
     const [Sections, setSections] = useState([]);
-    useEffect(async () => {
-        const info=await getMeetLog('testLog')
-        console.log(info)
-        setInfo(info)
-    }, [])
-    // useEffect(async () => {// 클라이언트 개발용
-    //     setInfo(transcription)
+    // useEffect(async () => {
+    //     const info=await getMeetLog('testLog')
+    //     console.log(info)
+    //     setInfo(info)
     // }, [])
+    useEffect(async () => {// 클라이언트 개발용
+        setInfo(transcription)
+    }, [])
 
     useEffect(() => {//Info를 section 으로 나누는 작업
         let sections=[]

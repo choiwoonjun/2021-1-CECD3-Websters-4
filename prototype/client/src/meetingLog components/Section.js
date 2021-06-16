@@ -6,7 +6,6 @@ function Section(props) {
         setInfo(props.info)
     }, [props.info])
     const imageUrl=`http://localhost:5000/meetingLog/image?imagePath=${Info.image&&Info.image.path.replaceAll('/','%2F')}`
-    //const imageUrl=``// 클라이언트 개발용
     return (
         <div style={{width:'1000px',border:'1px solid'}}>
             <img src={imageUrl} 
