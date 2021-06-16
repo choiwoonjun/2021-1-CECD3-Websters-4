@@ -46,18 +46,20 @@ class LoadClass:
                 self.start_time.append(all_start_time[index + len(self.speech[i].split(" "))])
                 index += len(self.speech[i].split(" "))
 
+        time = "time"
+        speech = "speech"
         #문장과 start time 페어링링
-        meetinglog = []
+        self.meetinglog = []
         for i in range(0, len(self.speech)):
-            meetinglog.append(self.start_time[i] + " : " + self.speech[i])
+            #self.meetinglog.append('{ '+time+' : ' + self.start_time[i] + ' , '+speech+' : ' + self.speech[i] + ' }')
+            self.meetinglog.append({time:float(self.start_time[i]) ,speech:self.speech[i]})
+
 
         #전체회의록, 시작시간, speech json파일로 저장
         #self.output_file = "D:/dongguk2021-1/종설1/auto meeting log/API_TEST_LOG.json"
         self.output_file = output_file
         file_data = OrderedDict()
-        file_data["meeting_log"] = meetinglog
-        file_data["start_time"] = self.start_time
-        file_data["speech"] = self.speech
+        file_data["meeting_log"] = self.meetinglog
 
         self.output=file_data
         with open(self.output_file, 'w', encoding="utf-8") as make_file:

@@ -18,7 +18,7 @@ const getTranscriptionJob=(TranscriptionJobName)=>{
             fs.mkdirSync(dirPath, {recursive: true});
             const rawTranscPath=path.resolve(dirPath,'raw.json')
             fs.createFileSync(rawTranscPath);
-            fs.writeFileSync(rawTranscPath, Buffer.from(transcription));
+            //fs.writeFileSync(rawTranscPath, Buffer.from(transcription));
             const editTranscPath=path.resolve(dirPath,'edit.json')
             resolve({rawTranscPath,editTranscPath})
         } catch (error) {
@@ -43,6 +43,8 @@ const editTranscription=(paths)=>{
         console.log(data)
     });
 }
+
+
 
 
 module.exports={ getTranscriptionJob,editTranscription };
