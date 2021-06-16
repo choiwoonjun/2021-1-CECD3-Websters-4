@@ -51,7 +51,9 @@ class DashboardPage extends React.Component {
             <Card>
               <Input type="date" name="date" id="date" placeholder="date" />
               <CardHeader>Shown Video</CardHeader>
-              <CardBody style={{ height: '100vh' }}></CardBody>
+              <CardBody style={{ height: '100vh' }}>
+                <video id='meetingVideo' src="./testVideo.mp4" style={{width:'400px',height: '400px',border:'solid 1px'}} controls></video>
+              </CardBody>
               {}
             </Card>
           </Col>
