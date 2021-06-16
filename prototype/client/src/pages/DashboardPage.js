@@ -1,6 +1,6 @@
 import Page from 'components/Page';
 import React from 'react';
-
+import MeetingLog from '../meetingLog components/MeetingLog'
 import { Card, CardBody, CardHeader, Col, Row } from 'reactstrap';
 import {
   // Button,
@@ -42,6 +42,7 @@ class DashboardPage extends React.Component {
               <CardHeader style={{ }}>
                 생성된 회의록 <Label for="exampleDate" />
               </CardHeader>
+              <MeetingLog/>
               <CardBody style={{ height: '100vh' }} />
             </Card>
           </Col>
