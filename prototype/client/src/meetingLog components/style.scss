@@ -1,7 +1,7 @@
 .Meeting_container{
     //margin: 1.25rem auto;
     margin-top: 3rem auto;
-    border-bottom: 5px solid;
+    border-bottom: 2px solid;
     //height: 100%;
     // padding-bottom: 30px;
     // padding-top: 20px;
@@ -29,7 +29,9 @@
     background-color: #F0FFFF;
 }
 .speech{
-    color: rgb(156, 153, 153);
+    color: black;
+    margin: 2rem auto;
+    background-color: #F0FFFF;
 }
 .speech:hover{
     color:blue;

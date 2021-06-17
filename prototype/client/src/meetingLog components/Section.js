@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import time from 'assets/img/logo/time.png';
 import './style.scss';
 function Section(props) {
   const [Info, setInfo] = useState({});
@@ -19,13 +20,13 @@ function Section(props) {
           Info.transcripts.map(t => {
             return (
               <div
-                className="duration"
+                className="speech"
                 onClick={() => {
                   video.currentTime = t.time;
                   video.play();
                 }}
               >
-                {t.time}: <div className="speech">{t.speech}</div>
+               <img src={time} style={{width:"10px"}}/> {t.time} : {t.speech}
               </div>
             );
           })}
