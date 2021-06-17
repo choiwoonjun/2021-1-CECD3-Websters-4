@@ -4,7 +4,9 @@ import { UserCard } from 'components/Card';
 import SearchInput from 'components/SearchInput';
 //import { notificationsData } from 'demos/header';
 import withBadge from 'hocs/withBadge';
+import {CardBody} from 'reactstrap';
 import React from 'react';
+import './style.scss';
 import {
   MdClearAll,
   MdExitToApp,
@@ -87,7 +89,11 @@ class Header extends React.Component {
           <SearchInput />
         </Nav>
 
+
         <Nav navbar className={bem.e('nav-right')}>
+        <CardBody className="logout-button">
+        <Button color="primary" width="100">Logout</Button>
+        </CardBody>
           <NavItem>
             <NavLink id="Popover2">
               <Avatar
@@ -116,9 +122,9 @@ class Header extends React.Component {
                     <ListGroupItem tag="button" action className="border-light">
                       <MdSettingsApplications /> 설정
                     </ListGroupItem>
-                    <ListGroupItem tag="button" action className="border-light">
+                    {/* <ListGroupItem tag="button" action className="border-light">
                       <MdExitToApp /> Signout
-                    </ListGroupItem>
+                    </ListGroupItem> */}
                   </ListGroup>
                 </UserCard>
               </PopoverBody>

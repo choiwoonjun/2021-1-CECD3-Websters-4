@@ -10,11 +10,8 @@ function Section(props) {
   const video = document.getElementById('meetingVideo');
   return (
     <div className="Meeting_container">
-      <div className="video">
-        <img
-          className="video"
-          src={imageUrl}
-        />
+      <div className="">
+        <img className="video" src={imageUrl} />
       </div>
 
       <div className="meeting_log">
@@ -22,13 +19,13 @@ function Section(props) {
           Info.transcripts.map(t => {
             return (
               <div
-                // className="duration"
+                className="duration"
                 onClick={() => {
                   video.currentTime = t.time;
                   video.play();
                 }}
               >
-                {t.speech}
+                {t.time}: <div className="speech">{t.speech}</div>
               </div>
             );
           })}

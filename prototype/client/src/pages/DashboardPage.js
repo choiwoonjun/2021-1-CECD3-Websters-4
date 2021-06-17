@@ -43,9 +43,8 @@ class DashboardPage extends React.Component {
               <CardHeader style={{}}>
                 생성된 회의록 <Label for="exampleDate" />
               </CardHeader>
-              <div className="Meeting_container">
-                <MeetingLog />
-              </div>
+
+              <MeetingLog />
 
               <CardBody style={{ height: '100vh' }} />
             </Card>
@@ -53,7 +52,7 @@ class DashboardPage extends React.Component {
 
           <Col lg="6" md="12" sm="12" xs="12">
             <Card>
-              <Input type="date" name="date" id="date" placeholder="date" />
+              {/* <Input type="date" name="date" id="date" placeholder="date" /> */}
               <CardHeader>Shown Video</CardHeader>
               <CardBody>
                 <div>Test Video</div>

@@ -1,18 +1,19 @@
 .Meeting_container{
     //margin: 1.25rem auto;
     margin-top: 3rem auto;
-    border-bottom: 10px solid;
+    border-bottom: 5px solid;
     //height: 100%;
     // padding-bottom: 30px;
     // padding-top: 20px;
-    // width:100vh;
+    width:100%;
     // height:100vh;
 }
+
 .video{
-    width:200px;
-    height:100px;
+    width:300px;
+    height:200px;
     margin: 1.5rem auto;
-    margin-left: 15rem;
+    padding-left: 10px;
     // border: 2px solid;
 }
 .shown_video{
@@ -21,20 +22,21 @@
     height: 50vh;
     border: solid 3px;
 }
-// .duration{
 
-
-// }
+.duration{
+    color:black;
+    margin: 2rem auto;
+    background-color: #F0FFFF;
+}
+.speech{
+    color: rgb(156, 153, 153);
+}
+.speech:hover{
+    color:blue;
+   
+}
 .meeting_log{
     cursor: pointer;
     margin-left: 0.5rem;
     // margin-top: 1rem;\
-}
-.meeting_log:hover{
-    // max-width: 100%;
-    // max-height: 500vh;
-    //background-color:blue;
-    color:#008CBA;
-    cursor: pointer;
-    margin-top: 1rem;
 }
