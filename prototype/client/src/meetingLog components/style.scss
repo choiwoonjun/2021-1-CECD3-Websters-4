@@ -1,6 +1,7 @@
 .Meeting_container{
     //margin: 1.25rem auto;
     margin-top: 3rem auto;
+    border-bottom: 10px solid;
     //height: 100%;
     // padding-bottom: 30px;
     // padding-top: 20px;
@@ -11,13 +12,12 @@
     width:200px;
     height:100px;
     margin: 1.5rem auto;
-    margin-left: 35rem;
+    margin-left: 15rem;
     // border: 2px solid;
-
 }
 .shown_video{
     margin: 3rem auto;
-    width: 100vh;
+    width: 80vh;
     height: 50vh;
     border: solid 3px;
 }
@@ -26,11 +26,9 @@
 
 // }
 .meeting_log{
-
     cursor: pointer;
     margin-left: 0.5rem;
-    // margin-top: 1rem;
-
+    // margin-top: 1rem;\
 }
 .meeting_log:hover{
     // max-width: 100%;
@@ -38,7 +36,5 @@
     //background-color:blue;
     color:#008CBA;
     cursor: pointer;
-
     margin-top: 1rem;
-
 }
