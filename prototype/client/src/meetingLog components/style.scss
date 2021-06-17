@@ -1,0 +1,44 @@
+.Meeting_container{
+    //margin: 1.25rem auto;
+    margin-top: 3rem auto;
+    //height: 100%;
+    // padding-bottom: 30px;
+    // padding-top: 20px;
+    // width:100vh;
+    // height:100vh;
+}
+.video{
+    width:200px;
+    height:100px;
+    margin: 1.5rem auto;
+    margin-left: 35rem;
+    // border: 2px solid;
+
+}
+.shown_video{
+    margin: 3rem auto;
+    width: 100vh;
+    height: 50vh;
+    border: solid 3px;
+}
+// .duration{
+
+
+// }
+.meeting_log{
+
+    cursor: pointer;
+    margin-left: 0.5rem;
+    // margin-top: 1rem;
+
+}
+.meeting_log:hover{
+    // max-width: 100%;
+    // max-height: 500vh;
+    //background-color:blue;
+    color:#008CBA;
+    cursor: pointer;
+
+    margin-top: 1rem;
+
+}

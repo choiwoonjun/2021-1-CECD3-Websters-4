@@ -1,7 +1,8 @@
 import Page from 'components/Page';
 import React from 'react';
-import MeetingLog from '../meetingLog components/MeetingLog'
+import MeetingLog from '../meetingLog components/MeetingLog';
 import { Card, CardBody, CardHeader, Col, Row } from 'reactstrap';
+
 import {
   // Button,
   // Form,
@@ -39,10 +40,13 @@ class DashboardPage extends React.Component {
         <Row>
           <Col lg="6" md="12" sm="12" xs="12">
             <Card>
-              <CardHeader style={{ }}>
+              <CardHeader style={{}}>
                 생성된 회의록 <Label for="exampleDate" />
               </CardHeader>
-              <MeetingLog/>
+              <div className="Meeting_container">
+                <MeetingLog />
+              </div>
+
               <CardBody style={{ height: '100vh' }} />
             </Card>
           </Col>
@@ -51,9 +55,16 @@ class DashboardPage extends React.Component {
             <Card>
               <Input type="date" name="date" id="date" placeholder="date" />
               <CardHeader>Shown Video</CardHeader>
-              <CardBody style={{ height: '100vh' }}>
-                <video id='meetingVideo' src="./testVideo.mp4" style={{width:'400px',height: '400px',border:'solid 1px'}} controls></video>
+              <CardBody>
+                <div>Test Video</div>
+                <video
+                  id="meetingVideo"
+                  className="shown_video"
+                  src="./testVideo.mp4"
+                  controls
+                ></video>
               </CardBody>
+
               {}
             </Card>
           </Col>

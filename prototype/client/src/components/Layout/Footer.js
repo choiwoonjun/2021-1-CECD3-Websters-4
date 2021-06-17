@@ -10,7 +10,7 @@ const Footer = () => {
       {/* Set footer to center */}
       <Nav className="justify-content-center" style={{ flex: 1}}>
         <NavItem>
-          Websters Created on 2021/06/12
+          {/* Websters Created on 2021/06/12 */}
         </NavItem>
       </Nav>
     </Navbar>

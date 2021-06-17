@@ -35,7 +35,7 @@ function MeetingLog() {
         setSections(sections)
     }, [Info])
     return (
-        <div>
+        <div className="meeting_log">
             {Sections&&Sections.map((section)=>{
                 return <Section info={section}/>
             })}
