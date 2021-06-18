@@ -10,7 +10,7 @@ class TranscribeClass:
         #transcribe job name -> 입력받거나 argv로 대체할 계획
         job_name = "API-test"
         #transcribe을 진행할 영상이 저장된 벜킷 주소  -> 입력받거나 argv로 대체할 계획
-        job_uri = "https://first-taeyongs-bucket.s3.ap-northeast-2.amazonaws.com/announcer.mp4"
+        job_uri = "put your bucket & mp4 file"
         transcribe.start_transcription_job(
             TranscriptionJobName=job_name,
             Media={"MediaFileUri": job_uri},
