@@ -6,8 +6,7 @@ function Section(props) {
   useEffect(() => {
     setInfo(props.info);
   }, [props.info]);
-  //const imageUrl=`http://localhost:5000/meetingLog/image?imagePath=${Info.image&&Info.image.path.replaceAll('/','%2F')}`
-  const imageUrl = ``;
+  const imageUrl=`http://localhost:5000/meetingLog/image?imagePath=${Info.image&&Info.image.path.replaceAll('/','%2F')}`
   const video = document.getElementById('meetingVideo');
   return (
     <div className="Meeting_container">
