@@ -1,3 +1,5 @@
+import pickle
+
 import matplotlib.pyplot as plt
 from setting import *
 from func.data import getData
@@ -30,3 +32,18 @@ def showVideoInfo():
     print('Frame height:', int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT)))  # 비디오 세로
     print('Frame count:', int(cap.get(cv2.CAP_PROP_FRAME_COUNT)))  # 전체 프레임 수
     print('FPS:', cap.get(cv2.CAP_PROP_FPS))  # 초당 프레임 수
+
+def saveDataList():
+    data = []
+    for frame in frames:
+        cap.set(cv2.CAP_PROP_POS_FRAMES, frame)
+        ret, image = cap.read()
+        tempData = getData(image)
+        data.append(tempData)
+    with open(f"resource/{videoName}.txt", 'wb') as file:  # james.p 파일을 바이너리 쓰기 모드(wb)로 열기
+        pickle.dump(data, file)
+
+def getDataList():
+    with open(f"resource/{videoName}.txt", 'rb') as file:  # james.p 파일을 바이너리 읽기 모드(rb)로 열기
+        dataList = pickle.load(file)
+    return dataList

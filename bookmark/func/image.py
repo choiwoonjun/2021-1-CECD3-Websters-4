@@ -1,4 +1,5 @@
 # 이미지에 그리기, 출력 등 함수
+import cv2
 from setting import *
 import numpy as np
 import random

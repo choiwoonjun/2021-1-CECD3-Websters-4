@@ -1,8 +1,13 @@
 import cv2
 
-videoPath = "./resource/test3.mp4"  #사용할 동영상
+videoName = "test3"
+videoPath = f"./resource/{videoName}.mp4"  #사용할 동영상
+
 cap = cv2.VideoCapture(videoPath)
 
+frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+fps = int(cap.get(cv2.CAP_PROP_FPS))
+frames = [i for i in range(0,frame_count,fps)]
 
 # 바이너리화 알고리즘 사용 변수
 BLK_SIZE = 9  # 블럭 사이즈
