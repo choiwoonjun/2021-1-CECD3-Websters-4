@@ -24,7 +24,6 @@ public class FileService {
         } catch (IOException e) {
             throw new IllegalArgumentException("파일 변환 중 오류가 발생했습니다." + file.getOriginalFilename());
         }
-        System.out.println(s3Service.getFileUrl(fileName));
         return s3Service.getFileUrl(fileName);
     }
 

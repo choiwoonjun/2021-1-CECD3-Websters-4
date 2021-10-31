@@ -1,13 +1,15 @@
 package com.back.websters.service;
 
+import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.back.websters.component.CredentialsComponent;
 import com.back.websters.component.S3Component;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
-import software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider;
+import software.amazon.awssdk.auth.credentials.*;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.transcribe.TranscribeClient;
 import software.amazon.awssdk.services.transcribe.model.*;
@@ -20,19 +22,21 @@ import java.util.UUID;
 public class S3Service {
 
     private final AmazonS3Client amazonS3Client;
-    private final S3Component component;
+    private final S3Component s3Component;
+    private final CredentialsComponent credentialsComponent;
 
     public void uploadFile(InputStream inputStream, ObjectMetadata objectMetadata, String fileName) {
-        PutObjectRequest putObjectRequest = new PutObjectRequest(component.getBucket(), fileName, inputStream, objectMetadata);
+        PutObjectRequest putObjectRequest = new PutObjectRequest(s3Component.getBucket(), fileName, inputStream, objectMetadata);
         amazonS3Client.putObject(putObjectRequest);
     }
 
     public String getFileUrl(String fileName) {
-        return amazonS3Client.getResourceUrl(component.getBucket(), fileName);
+        return amazonS3Client.getResourceUrl(s3Component.getBucket(), fileName);
     }
 
     public String transcribe(String url) {
-        AwsCredentialsProvider credentialsProvider = DefaultCredentialsProvider.builder().build();
+        AwsCredentials credentials = AwsBasicCredentials.create(credentialsComponent.getAccessKey(), credentialsComponent.getSecretKey());
+        AwsCredentialsProvider credentialsProvider = StaticCredentialsProvider.create(credentials);
         TranscribeClient transcribeClient = TranscribeClient.builder()
                 .credentialsProvider(credentialsProvider)
                 .region(Region.AP_NORTHEAST_2)
@@ -43,12 +47,11 @@ public class S3Service {
                         .mediaFileUri(url)
                         .build())
                 .mediaFormat(MediaFormat.MP4)
-                .outputBucketName(component.getBucket())
+                .outputBucketName(s3Component.getBucket())
                 .transcriptionJobName(createJobName())
                 .build();
         TranscriptionJob result = transcribeClient.startTranscriptionJob(transcriptionJobRequest).transcriptionJob();
-        System.out.println(result);
-        return "";
+        return result.transcriptionJobStatusAsString();
     }
 
     private String createJobName() {
