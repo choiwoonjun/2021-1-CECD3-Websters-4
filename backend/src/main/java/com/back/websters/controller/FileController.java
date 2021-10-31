@@ -16,8 +16,4 @@ public class FileController {
         return fileService.uploadFile(file);
     }
 
-    @PostMapping("/api/v1/transcribe")
-    public String transcribeFile(@RequestParam("url") String fileUrl) {
-        return fileService.transcribe(fileUrl);
-    }
 }

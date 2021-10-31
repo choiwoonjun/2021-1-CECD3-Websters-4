@@ -25,8 +25,4 @@ public class FileService {
             throw new IllegalArgumentException("파일 변환 중 오류가 발생했습니다." + file.getOriginalFilename());
         }
     }
-
-    public String transcribe(String url) {
-        return s3Service.transcribe(url);
-    }
 }
