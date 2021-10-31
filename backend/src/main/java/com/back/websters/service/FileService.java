@@ -20,11 +20,10 @@ public class FileService {
         objectMetadata.setContentLength(file.getSize());
         objectMetadata.setContentType(file.getContentType());
         try (InputStream inputStream = file.getInputStream()){
-            s3Service.uploadFile(inputStream, objectMetadata, fileName);
+            return s3Service.uploadFile(inputStream, objectMetadata, fileName);
         } catch (IOException e) {
             throw new IllegalArgumentException("파일 변환 중 오류가 발생했습니다." + file.getOriginalFilename());
         }
-        return s3Service.getFileUrl(fileName);
     }
 
     public String transcribe(String url) {
