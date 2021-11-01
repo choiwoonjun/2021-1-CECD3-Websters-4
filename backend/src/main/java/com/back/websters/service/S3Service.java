@@ -105,7 +105,7 @@ public class S3Service {
         S3ObjectInputStream is = amazonS3Client.getObject(s3Component.getBucket(), jobName + ".json").getObjectContent();
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
         String line;
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         while ((line = br.readLine()) != null) {
             sb.append(line);
         }
