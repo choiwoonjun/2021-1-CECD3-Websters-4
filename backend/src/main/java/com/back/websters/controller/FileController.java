@@ -11,9 +11,9 @@ public class FileController {
 
     private final FileService fileService;
 
-    @PostMapping("/api/v1/upload")
-    public String uploadFile(@RequestPart MultipartFile file) {
-        return fileService.uploadFile(file);
+    @PostMapping("/api/v1/transcribe")
+    public String transcribe(@RequestPart MultipartFile file) {
+        return fileService.transcribe(file);
     }
 
 }

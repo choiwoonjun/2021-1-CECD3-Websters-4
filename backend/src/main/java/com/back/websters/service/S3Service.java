@@ -27,7 +27,7 @@ public class S3Service {
     private final S3Component s3Component;
     private final CredentialsComponent credentialsComponent;
 
-    public String uploadFile(InputStream inputStream, ObjectMetadata objectMetadata, String fileName) {
+    public String uploadAndTranscribe(InputStream inputStream, ObjectMetadata objectMetadata, String fileName) {
         PutObjectRequest putObjectRequest = new PutObjectRequest(s3Component.getBucket(), fileName, inputStream, objectMetadata);
         amazonS3Client.putObject(putObjectRequest);
         return transcribe(fileName);

@@ -14,13 +14,13 @@ public class FileService {
 
     private final S3Service s3Service;
 
-    public String uploadFile(MultipartFile file) {
+    public String transcribe(MultipartFile file) {
         String fileName = file.getOriginalFilename();
         ObjectMetadata objectMetadata = new ObjectMetadata();
         objectMetadata.setContentLength(file.getSize());
         objectMetadata.setContentType(file.getContentType());
-        try (InputStream inputStream = file.getInputStream()){
-            return s3Service.uploadFile(inputStream, objectMetadata, fileName);
+        try (InputStream inputStream = file.getInputStream()) {
+            return s3Service.uploadAndTranscribe(inputStream, objectMetadata, fileName);
         } catch (IOException e) {
             throw new IllegalArgumentException("파일 변환 중 오류가 발생했습니다." + file.getOriginalFilename());
         }
