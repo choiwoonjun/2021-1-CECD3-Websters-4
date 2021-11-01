@@ -26,6 +26,7 @@ public class S3Service {
     private final AmazonS3Client amazonS3Client;
     private final S3Component s3Component;
     private final CredentialsComponent credentialsComponent;
+    private final DataService dataService;
 
     public String uploadAndTranscribe(InputStream inputStream, ObjectMetadata objectMetadata, String fileName) {
         PutObjectRequest putObjectRequest = new PutObjectRequest(s3Component.getBucket(), fileName, inputStream, objectMetadata);
@@ -48,6 +49,7 @@ public class S3Service {
         if (fileExtension.equals(MediaFormat.UNKNOWN_TO_SDK_VERSION)) {
             throw new IllegalArgumentException("지원하지 않는 파일 확장자입니다.");
         }
+        dataService.saveVideo(fileName, getS3Uri(fileName));
 
         AwsCredentials credentials = AwsBasicCredentials.create(credentialsComponent.getAccessKey(), credentialsComponent.getSecretKey());
         AwsCredentialsProvider credentialsProvider = StaticCredentialsProvider.create(credentials);
