@@ -1,5 +1,7 @@
 package com.back.websters.service;
 
+import com.back.websters.domain.bookmark.Bookmark;
+import com.back.websters.domain.bookmark.BookmarkRepository;
 import com.back.websters.domain.video.Video;
 import com.back.websters.domain.video.VideoRepository;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 public class DataService {
 
     private final VideoRepository videoRepository;
+    private final BookmarkRepository bookmarkRepository;
 
     public long saveVideo(String fileName, String fileUri) {
         Video video = Video.builder()
@@ -22,5 +25,14 @@ public class DataService {
     public Video findVideoByName(String fileName) {
         return videoRepository.findByName(fileName)
                 .orElseThrow(() -> new IllegalArgumentException("해당하는 동영상이 존재하지 않습니다."));
+    }
+
+    public long saveBookmark(long videoId, String time) {
+        Bookmark bookmark = Bookmark.builder()
+                .time(time)
+                .video(videoRepository.findById(videoId)
+                        .orElseThrow(() -> new IllegalArgumentException("해당하는 동영상이 존재하지 않습니다.")))
+                .build();
+        return bookmarkRepository.save(bookmark).getId();
     }
 }
