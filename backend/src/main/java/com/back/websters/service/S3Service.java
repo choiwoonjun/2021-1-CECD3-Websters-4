@@ -6,7 +6,9 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.back.websters.component.CredentialsComponent;
 import com.back.websters.component.S3Component;
+import com.back.websters.utils.ScriptMaker;
 import lombok.RequiredArgsConstructor;
+import org.json.JSONException;
 import org.springframework.stereotype.Service;
 import software.amazon.awssdk.auth.credentials.*;
 import software.amazon.awssdk.regions.Region;
@@ -27,6 +29,7 @@ public class S3Service {
     private final S3Component s3Component;
     private final CredentialsComponent credentialsComponent;
     private final DataService dataService;
+    private final ScriptMaker scriptMaker;
 
     public String uploadAndTranscribe(InputStream inputStream, ObjectMetadata objectMetadata, String fileName) {
         PutObjectRequest putObjectRequest = new PutObjectRequest(s3Component.getBucket(), fileName, inputStream, objectMetadata);
@@ -49,7 +52,7 @@ public class S3Service {
         if (fileExtension.equals(MediaFormat.UNKNOWN_TO_SDK_VERSION)) {
             throw new IllegalArgumentException("지원하지 않는 파일 확장자입니다.");
         }
-        dataService.saveVideo(fileName, getS3Uri(fileName));
+        long videoId = dataService.saveVideo(fileName, getS3Uri(fileName));
 
         AwsCredentials credentials = AwsBasicCredentials.create(credentialsComponent.getAccessKey(), credentialsComponent.getSecretKey());
         AwsCredentialsProvider credentialsProvider = StaticCredentialsProvider.create(credentials);
@@ -77,10 +80,13 @@ public class S3Service {
                 result = transcribeClient.getTranscriptionJob(getTranscriptionJobRequest).transcriptionJob();
                 if (result.transcriptionJobStatus().equals(TranscriptionJobStatus.COMPLETED)) {
                     try {
-                        System.out.println(getTranscriptionResult(jobName));
+                        // JSON Parsing
+                        scriptMaker.convertJsonToScript(getTranscriptionResult(jobName), videoId);
                         return result.transcriptionJobStatusAsString();
                     } catch (IOException e) {
                         throw new IllegalArgumentException("결과에 오류가 있습니다.");
+                    } catch (JSONException e) {
+                        throw new IllegalArgumentException("변환 과정에서 오류가 있습니다.");
                     }
                 }
                 if (result.transcriptionJobStatus().equals(TranscriptionJobStatus.FAILED)) {
