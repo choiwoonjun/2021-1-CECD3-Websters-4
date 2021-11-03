@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest()
@@ -107,6 +109,40 @@ class DataServiceTest {
         assertThat(result.getContent()).isEqualTo(content);
         assertThat(result.getStartTime()).isEqualTo(startTime);
         assertThat(result.getEndTime()).isEqualTo(endTime);
+
+    }
+
+    @Test
+    void 스크립트_조회() {
+        // given
+        String videoName = "myvideo.mp4";
+        String videoUri = "S3://test/myvideo.mp4";
+        long videoId = dataService.saveVideo(videoName, videoUri);
+
+        String startTime1 = "00:00";
+        String endTime1 = "00:03";
+        String content1 = "테스트";
+        Script script1 = Script.builder()
+                .startTime(startTime1)
+                .endTime(endTime1)
+                .content(content1).build();
+        long script1Id = dataService.saveScript(videoId, script1);
+
+        String startTime2 = "00:03";
+        String endTime2 = "00:05";
+        String content2 = "끝";
+        Script script2 = Script.builder()
+                .startTime(startTime2)
+                .endTime(endTime2)
+                .content(content2).build();
+        long script2Id = dataService.saveScript(videoId, script2);
+
+        // when
+        List<Script> result = dataService.findScripts(videoName);
+
+        // then
+        assertThat(result.get(0).getId()).isEqualTo(script1Id);
+        assertThat(result.get(1).getId()).isEqualTo(script2Id);
 
     }
 

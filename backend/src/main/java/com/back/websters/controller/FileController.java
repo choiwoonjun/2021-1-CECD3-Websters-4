@@ -16,4 +16,14 @@ public class FileController {
         return fileService.transcribe(file);
     }
 
+    @GetMapping("/api/v1/videos")
+    public String getVideoList() {
+        return fileService.getVideoList();
+    }
+
+    @GetMapping("/api/v1/scripts/{videoName}")
+    public String getScripts(@PathVariable String videoName) {
+        return fileService.getScripts(videoName);
+    }
+
 }

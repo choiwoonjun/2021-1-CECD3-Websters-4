@@ -9,6 +9,8 @@ import com.back.websters.domain.video.VideoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class DataService {
@@ -44,4 +46,14 @@ public class DataService {
                 .orElseThrow(() -> new IllegalArgumentException("해당하는 동영상이 존재하지 않습니다.")));
         return scriptRepository.save(script).getId();
     }
+
+    public List<Video> findAllVideos() {
+        return videoRepository.findAll();
+    }
+
+    public List<Script> findScripts(String videoName) {
+        return scriptRepository.findAllByVideo(videoRepository.findByName(videoName)
+                .orElseThrow(() -> new IllegalArgumentException("해당하는 동영상이 존재하지 않습니다.")));
+    }
+
 }
