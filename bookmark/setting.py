@@ -14,14 +14,17 @@ BLK_SIZE = 9  # 블럭 사이즈
 C = 5  # 차감 상수
 
 # contour 처리 최소 넓이
-AREA_LIMIT = 100
+AREA_LIMIT = 300
 
 # contour 비교할때 최소 거리
 NEIGHBOR_DIST = 10
 MIN_SIMILARILTY = 2
 
 # 유사도 분석
-CNT_RATIO = 100
+CNT_RATIO = 90
 AREA_RATIO = 100-CNT_RATIO
+
+# 슬라이드 점수 threshold
+SLIDE_SCORE = 35
 
 

@@ -2,20 +2,20 @@
 from func.image import getImage
 from func.util import *
 
-frame1 = 2370
-frame2 = 2400
+frame = 1530
+prevFrame = frame-fps
 
-image1 = getImage(frame1)
-image2 = getImage(frame2)
+image1 = getImage(frame)
+image2 = getImage(prevFrame)
 
-frame1 = Frame(frame1)
-frame2 = Frame(frame2)
+frame = Frame(frame)
+prevFrame = Frame(prevFrame)
 
-frame1.show("1")
-frame2.show("2")
+frame.show("now")
+prevFrame.show("prev")
 
-result_frame = frame2.getResultFrame(frame1)
-result_frame.show("result")
+frame.setMismatchContours(prevFrame)
+frame.showMismatch("mismatch")
 
 cv2.waitKey(0)
 

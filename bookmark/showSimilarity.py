@@ -9,13 +9,14 @@ from setting import cap, frameIndexs
 if cap.isOpened():
     start = time.time()
 
-    frameUtil = FrameUtil(None)
-    frameUtil.getBoomarks()
-
+    # frameUtil = FrameUtil(None)
+    frameUtil = getFrameUtil()
+    boomarks = frameUtil.getBoomarks()
+    print(boomarks)
     end = time.time()
     print(f"{end - start:.5f} sec")
 
-    graphFrames = [frame for frame in frameUtil.frames if frame.score>10]
+    graphFrames = [frame for frame in frameUtil.frames if frame.score>20]
     x = [frame.idx for frame in graphFrames]
     scores = [frame.score for frame in graphFrames]
     showStickGraph(x,scores,"cnt")

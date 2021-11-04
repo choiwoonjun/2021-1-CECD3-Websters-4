@@ -3,7 +3,7 @@ import math
 from classes.Frame import Frame
 from typing import List
 
-from setting import frameIndexs, CNT_RATIO, AREA_RATIO
+from setting import frameIndexs, CNT_RATIO, AREA_RATIO, SLIDE_SCORE
 
 
 class FrameUtil:
@@ -38,7 +38,7 @@ class FrameUtil:
     def getBoomarks(self):
         self.setMismatchContours()
         self.setScores()
-        print(self)
+        return [frame.idx for frame in self.frames if frame.score>SLIDE_SCORE]
 
 
 

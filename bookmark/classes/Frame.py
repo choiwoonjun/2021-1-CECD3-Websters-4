@@ -53,6 +53,12 @@ class Frame:
             cv2.drawContours(img1, contour.shape, -1, getRandomColor(), 4)
         cv2.imshow(title, img1)
 
+    def showMismatch(self, title):
+        img1 = 255 * np.ones(shape=[720, 1280, 3], dtype=np.uint8)
+        for contour in self.misMatchContours:
+            cv2.drawContours(img1, contour.shape, -1, getRandomColor(), 4)
+        cv2.imshow(title, img1)
+
     def setNeighborRange(self,l, r, x, nowContours):
         while l < len(nowContours) and nowContours[l].x < x - NEIGHBOR_DIST:
             l += 1
