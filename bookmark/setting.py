@@ -1,7 +1,7 @@
 import cv2
 
 videoName = "test1"
-videoPath = f"./resource/{videoName}.mp4"  #사용할 동영상
+videoPath = f"C:/Users/김건오\Desktop/2021-1-CECD3-Websters-4/bookmark/resource/{videoName}.mp4"
 
 cap = cv2.VideoCapture(videoPath)
 

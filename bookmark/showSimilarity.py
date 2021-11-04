@@ -3,14 +3,14 @@ import cv2
 import matplotlib.pyplot as plt
 
 from classes.FrameUtil import FrameUtil
-from func.util import getFrameUtil, showStickGraph
+from func.util import getFrameUtilCache, showStickGraph
 from setting import cap, frameIndexs
 
 if cap.isOpened():
     start = time.time()
 
     # frameUtil = FrameUtil(None)
-    frameUtil = getFrameUtil()
+    frameUtil = getFrameUtilCache()
     boomarks = frameUtil.getBoomarks()
     print(boomarks)
     end = time.time()

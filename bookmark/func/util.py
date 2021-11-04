@@ -52,11 +52,11 @@ def showVideoInfo():
 
 def saveFrameUtil():
     frames = FrameUtil([Frame(frameIdx) for frameIdx in frameIndexs])
-    with open(f"resource/{videoName}.txt", 'wb') as file:  # james.p 파일을 바이너리 쓰기 모드(wb)로 열기
+    with open(f"C:/Users/김건오\Desktop/2021-1-CECD3-Websters-4/bookmark/resource/{videoName}.txt", 'wb') as file:  # james.p 파일을 바이너리 쓰기 모드(wb)로 열기
         pickle.dump(frames, file)
 
 
-def getFrameUtil() -> FrameUtil:
-    with open(f"resource/{videoName}.txt", 'rb') as file:  # james.p 파일을 바이너리 읽기 모드(rb)로 열기
+def getFrameUtilCache() -> FrameUtil:
+    with open(f"C:/Users/김건오\Desktop/2021-1-CECD3-Websters-4/bookmark/resource/{videoName}.txt", 'rb') as file:  # james.p 파일을 바이너리 읽기 모드(rb)로 열기
         frames = pickle.load(file)
     return frames

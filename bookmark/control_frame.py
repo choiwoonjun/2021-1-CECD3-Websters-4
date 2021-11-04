@@ -1,13 +1,13 @@
 import cv2
 
-from func.util import getFrameUtil
+from func.util import getFrameUtilCache
 from setting import cap, frameIndexs
 
 if cap.isOpened():
 
     frameNum = len(frameIndexs)
     idx = 1
-    frameUtil = getFrameUtil()
+    frameUtil = getFrameUtilCache()
     while True:  # 무한 루프
 
         nowFrame = frameIndexs[idx]
