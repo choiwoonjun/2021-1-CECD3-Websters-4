@@ -17,8 +17,8 @@ if cap.isOpened():
         if not ret:  # 새로운 프레임을 못받아 왔을 때 braek
             break
 
-        nowFrame = frameUtil.frameList[idx]
-        prevFrame = frameUtil.frameList[idx-1]
+        nowFrame = frameUtil.frames[idx]
+        prevFrame = frameUtil.frames[idx - 1]
 
         nowFrame.show("now")
         prevFrame.show("prev")

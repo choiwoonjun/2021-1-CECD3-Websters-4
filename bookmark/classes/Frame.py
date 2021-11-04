@@ -23,6 +23,8 @@ class Contour:
 class Frame:
     idx = 0
     contours = []
+    misMatchContours = []
+    score = 0
 
     def __init__(self, idx, contours=None):
         self.idx = idx
@@ -59,7 +61,7 @@ class Frame:
 
         return l, r
 
-    def getResultFrame(self, prevFrame: Frame) -> Frame:
+    def setMismatchContours(self, prevFrame: Frame) -> Frame:
         l, r = 0, 0
         prevContours, nowContours = prevFrame.contours, self.contours
         prevMissed, nowMissed = [True] * (len(prevContours)), [True] * (len(nowContours))
@@ -84,5 +86,5 @@ class Frame:
 
         mismatchContours = [prevContours[i] for i in range(len(prevMissed)) if prevMissed[i]] \
                            + [nowContours[i] for i in range(len(nowMissed)) if nowMissed[i]]
-        return Frame(self.idx, mismatchContours)
+        self.misMatchContours=mismatchContours
 
