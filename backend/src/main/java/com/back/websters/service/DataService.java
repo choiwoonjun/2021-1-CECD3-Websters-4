@@ -56,4 +56,8 @@ public class DataService {
                 .orElseThrow(() -> new IllegalArgumentException("해당하는 동영상이 존재하지 않습니다.")));
     }
 
+    public List<Bookmark> findBookmarks(String videoName) {
+        return bookmarkRepository.findAllByVideo(videoRepository.findByName(videoName)
+                .orElseThrow(() -> new IllegalArgumentException("해당하는 동영상이 존재하지 않습니다.")));
+    }
 }

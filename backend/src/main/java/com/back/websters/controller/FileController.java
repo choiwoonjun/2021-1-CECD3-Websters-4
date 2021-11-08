@@ -26,4 +26,9 @@ public class FileController {
         return fileService.getScripts(videoName);
     }
 
+    @GetMapping("/api/v1/bookmarks/{videoName}")
+    public String getBookmarks(@PathVariable String videoName) {
+        return fileService.getBookmarks(videoName);
+    }
+
 }
