@@ -2,7 +2,7 @@
 from setting import *
 import random
 
-def getImage(frame):
+def getImage(cap,frame):
     cap.set(cv2.CAP_PROP_POS_FRAMES, frame)
     ret, image = cap.read()
     if not ret:

@@ -26,26 +26,40 @@ class Frame:
     misMatchContours = []
     score = 0
 
-    def __init__(self, idx, contours=None):
+    def __init__(self, cap, idx):
         self.idx = idx
-        # print(idx)
-        if contours==None:
-            image = getImage(idx)
-            imthres = getBinaryImage(image)
-            contours, hierarchy = cv2.findContours(imthres, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
-            temp=[]
-            for contour in contours:
-                mmt = cv2.moments(contour)
-                area = int(cv2.contourArea(contour))
-                if mmt['m00'] == 0 or area < AREA_LIMIT:
-                    continue
-                c = Contour(int(mmt['m10'] / mmt['m00']), int(mmt['m01'] / mmt['m00']), area, contour)
-                temp.append(c)
-            self.contours=temp
-            self.contours.sort(key=lambda a: (a.x, a.y))
-        else:
-            self.contours=contours
-            # print(len(contours),len(self.contours))
+        image = getImage(cap, idx)
+        imthres = getBinaryImage(image)
+        contours, hierarchy = cv2.findContours(imthres, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
+        temp=[]
+        for contour in contours:
+            mmt = cv2.moments(contour)
+            area = int(cv2.contourArea(contour))
+            if mmt['m00'] == 0 or area < AREA_LIMIT:
+                continue
+            c = Contour(int(mmt['m10'] / mmt['m00']), int(mmt['m01'] / mmt['m00']), area, contour)
+            temp.append(c)
+        self.contours=temp
+        self.contours.sort(key=lambda a: (a.x, a.y))
+
+    # def __init__(self, idx, contours=None):
+    #     self.idx = idx
+    #     if contours==None:
+    #         image = getImage(idx)
+    #         imthres = getBinaryImage(image)
+    #         contours, hierarchy = cv2.findContours(imthres, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
+    #         temp=[]
+    #         for contour in contours:
+    #             mmt = cv2.moments(contour)
+    #             area = int(cv2.contourArea(contour))
+    #             if mmt['m00'] == 0 or area < AREA_LIMIT:
+    #                 continue
+    #             c = Contour(int(mmt['m10'] / mmt['m00']), int(mmt['m01'] / mmt['m00']), area, contour)
+    #             temp.append(c)
+    #         self.contours=temp
+    #         self.contours.sort(key=lambda a: (a.x, a.y))
+    #     else:
+    #         self.contours=contours
 
     def show(self, title):
         img1 = 255 * np.ones(shape=[720, 1280, 3], dtype=np.uint8)

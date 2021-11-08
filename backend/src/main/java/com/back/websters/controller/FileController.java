@@ -16,7 +16,8 @@ public class FileController {
     @PostMapping("/api/v1/transcribe")
     public String transcribe(@RequestPart MultipartFile file) {
         bookmarkService.save(file);
-        return fileService.transcribe(file);
+        return "";
+//        return fileService.transcribe(file);
     }
 
     @GetMapping("/api/v1/videos")

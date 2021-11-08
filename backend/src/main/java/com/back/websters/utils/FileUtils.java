@@ -48,9 +48,11 @@ public class FileUtils {
         return filePath;
     }
 
-    public void deleteFile(String filePath) {
+     static public void deleteFile(String filePath) {
         File localFile = new File(filePath);
+        System.out.println("delete filePath = " + filePath);
         boolean deleteSuccess = localFile.delete();
+        System.out.println("deleteSuccess = " + deleteSuccess);
 
         if(!deleteSuccess) {
             throw new IllegalArgumentException("파일 삭제 중 오류가 발생했습니다. " + filePath);
