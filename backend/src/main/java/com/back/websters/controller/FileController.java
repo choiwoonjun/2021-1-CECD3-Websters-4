@@ -1,5 +1,6 @@
 package com.back.websters.controller;
 
+import com.back.websters.service.BookmarkService;
 import com.back.websters.service.FileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -10,9 +11,11 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileController {
 
     private final FileService fileService;
+    private final BookmarkService bookmarkService;
 
     @PostMapping("/api/v1/transcribe")
     public String transcribe(@RequestPart MultipartFile file) {
+        bookmarkService.save(file);
         return fileService.transcribe(file);
     }
 

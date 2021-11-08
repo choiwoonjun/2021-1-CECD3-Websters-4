@@ -6,7 +6,7 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.back.websters.component.CredentialsComponent;
 import com.back.websters.component.S3Component;
-import com.back.websters.utils.FileNameUtils;
+import com.back.websters.utils.FileUtils;
 import com.back.websters.utils.ScriptMaker;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONException;
@@ -30,7 +30,7 @@ public class S3Service {
     private final CredentialsComponent credentialsComponent;
     private final DataService dataService;
     private final ScriptMaker scriptMaker;
-    private final FileNameUtils fileNameUtils;
+    private final FileUtils fileNameUtils;
 
     public String uploadAndTranscribe(InputStream inputStream, ObjectMetadata objectMetadata, String fileName) {
         PutObjectRequest putObjectRequest = new PutObjectRequest(s3Component.getBucket(), fileName, inputStream, objectMetadata);
