@@ -6,6 +6,7 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.back.websters.component.CredentialsComponent;
 import com.back.websters.component.S3Component;
+import com.back.websters.utils.FileNameUtils;
 import com.back.websters.utils.ScriptMaker;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONException;
@@ -19,7 +20,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
@@ -30,6 +30,7 @@ public class S3Service {
     private final CredentialsComponent credentialsComponent;
     private final DataService dataService;
     private final ScriptMaker scriptMaker;
+    private final FileNameUtils fileNameUtils;
 
     public String uploadAndTranscribe(InputStream inputStream, ObjectMetadata objectMetadata, String fileName) {
         PutObjectRequest putObjectRequest = new PutObjectRequest(s3Component.getBucket(), fileName, inputStream, objectMetadata);
@@ -45,7 +46,7 @@ public class S3Service {
         // 확장자를 체크하여 지원하는 파일 형식인지 확인
         MediaFormat fileExtension;
         try {
-            fileExtension = MediaFormat.fromValue(getFileExtension(fileName).toLowerCase());
+            fileExtension = MediaFormat.fromValue(fileNameUtils.getFileExtension(fileName).toLowerCase());
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("잘못된 형식의 파일입니다.");
         }
@@ -61,7 +62,7 @@ public class S3Service {
                 .credentialsProvider(credentialsProvider)
                 .region(Region.AP_NORTHEAST_2)
                 .build();
-        String jobName = createJobName();
+        String jobName = fileNameUtils.createRandomName();
         StartTranscriptionJobRequest transcriptionJobRequest = StartTranscriptionJobRequest.builder()
                 .identifyLanguage(true) // 입력 음성 국적 자동 감지
                 .media(Media.builder()
@@ -95,18 +96,6 @@ public class S3Service {
             }
         }
         return result.transcriptionJobStatusAsString();
-    }
-
-    private String createJobName() {
-        return UUID.randomUUID().toString();
-    }
-
-    private String getFileExtension(String fileName) {
-        try {
-            return fileName.substring(fileName.lastIndexOf(".") + 1);
-        } catch (StringIndexOutOfBoundsException e) {
-            throw new IllegalArgumentException("잘못된 형식의 파일입니다.");
-        }
     }
 
     private String getTranscriptionResult(String jobName) throws IOException {

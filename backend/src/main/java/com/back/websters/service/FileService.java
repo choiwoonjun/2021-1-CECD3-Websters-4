@@ -5,6 +5,7 @@ import com.back.websters.component.FilePathComponent;
 import com.back.websters.domain.bookmark.Bookmark;
 import com.back.websters.domain.script.Script;
 import com.back.websters.domain.video.Video;
+import com.back.websters.utils.FileNameUtils;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -23,6 +24,7 @@ public class FileService {
     private final S3Service s3Service;
     private final DataService dataService;
     private final FilePathComponent filePathComponent;
+    private final FileNameUtils fileNameUtils;
 
     public String transcribe(MultipartFile file) {
         String fileName = file.getOriginalFilename();
@@ -45,7 +47,7 @@ public class FileService {
 
         try (InputStream inputStream = file.getInputStream()) {
             // 북마크 기능 사용을 위해 로컬에 파일 저장
-            File localFile = new File(localPath + '/' + fileName);
+            File localFile = new File(localPath + '/' + fileNameUtils.createRandomName() + '.' + fileNameUtils.getFileExtension(fileName));
             file.transferTo(localFile);
 
             /*
@@ -54,6 +56,7 @@ public class FileService {
 
             localFile.delete();
             return s3Service.uploadAndTranscribe(inputStream, objectMetadata, fileName);
+            //return "";
         } catch (IOException e) {
             e.printStackTrace();
             throw new IllegalArgumentException("파일 변환 중 오류가 발생했습니다. " + file.getOriginalFilename());
