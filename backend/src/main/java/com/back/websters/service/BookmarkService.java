@@ -17,31 +17,28 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Service
 public class BookmarkService {
-    private final BookmarkRepository bookmarkRepository;
-    private final FileUtils fileUtils;
     private final BoookmarkGeneratorPathComponent Generator;
+    private final DataService dataService;
 
-    public void save(MultipartFile file, Video video) {
-        String filePath = fileUtils.saveFile(file);
-        List<Bookmark> bookmarks = getBookmarks(filePath,video);
+    public void save(String filePath, long videoId) {
+        List<Bookmark> bookmarks = getBookmarks(filePath, videoId);
         System.out.println(bookmarks);
-        bookmarkRepository.saveAll(bookmarks);
-        fileUtils.deleteFile(filePath);
+        dataService.saveBookmarks(bookmarks);
     }
 
-    public List<Bookmark> getBookmarks(String filePath, Video video) {
+    public List<Bookmark> getBookmarks(String filePath, long videoId) {
         String times = getTimes(filePath);
         String[] split = times.split(" ");
-        List<Bookmark> bookmarks = Arrays.stream(split)
+        Video video = dataService.findVideoById(videoId);
+        return Arrays.stream(split)
                 .map(o -> Bookmark.builder().time(o).video(video).build()).collect(Collectors.toList());
-        return bookmarks;
     }
 
     public String getTimes(String filePath) {
         String result="";
         try {
-            String generaterPath = Generator.getPath();
-            ProcessBuilder processBuilder = new ProcessBuilder("python", generaterPath);
+            String generatorPath = Generator.getPath();
+            ProcessBuilder processBuilder = new ProcessBuilder("python", generatorPath);
             processBuilder.redirectErrorStream(true);
             Process process = processBuilder.start();
             OutputStream stdin = process.getOutputStream();
@@ -55,7 +52,7 @@ public class BookmarkService {
 
             int exitCode = process.waitFor();
             if (exitCode != 0) {
-                throw new Exception("북마크 생성 도중 오류");
+                throw new IllegalArgumentException("북마크 생성 도중 오류가 발생했습니다.");
             }
         } catch (Exception e) {
             e.printStackTrace();

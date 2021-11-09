@@ -29,7 +29,6 @@ public class FileUtils {
     public String saveFile(MultipartFile file) {
         String fileName = file.getOriginalFilename();
         String localPath = filePathComponent.getLocation();
-        String filePath = "";
         try {
             // 디렉토리 있는지 확인
             if (!new File(localPath).exists()) {
@@ -37,18 +36,17 @@ public class FileUtils {
             }
 
             // 북마크 기능 사용을 위해 로컬에 파일 저장
-            filePath = localPath + '/' + createRandomName() + '.' + getFileExtension(fileName);
+            String filePath = localPath + '/' + createRandomName() + '.' + getFileExtension(fileName);
             File localFile = new File(filePath);
             file.transferTo(localFile);
-
+            return filePath;
         } catch (IOException e) {
             e.printStackTrace();
             throw new IllegalArgumentException("파일 저장 중 오류가 발생했습니다. " + file.getOriginalFilename());
         }
-        return filePath;
     }
 
-     static public void deleteFile(String filePath) {
+     public void deleteFile(String filePath) {
         File localFile = new File(filePath);
         System.out.println("delete filePath = " + filePath);
         boolean deleteSuccess = localFile.delete();

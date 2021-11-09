@@ -27,6 +27,11 @@ public class DataService {
         return videoRepository.save(video).getId();
     }
 
+    public Video findVideoById(long videoId) {
+        return videoRepository.findById(videoId)
+                .orElseThrow(() -> new IllegalArgumentException("해당하는 동영상이 존재하지 않습니다."));
+    }
+
     public Video findVideoByName(String fileName) {
         return videoRepository.findByName(fileName)
                 .orElseThrow(() -> new IllegalArgumentException("해당하는 동영상이 존재하지 않습니다."));
@@ -39,6 +44,10 @@ public class DataService {
                         .orElseThrow(() -> new IllegalArgumentException("해당하는 동영상이 존재하지 않습니다.")))
                 .build();
         return bookmarkRepository.save(bookmark).getId();
+    }
+
+    public void saveBookmarks(List<Bookmark> bookmarks) {
+        bookmarkRepository.saveAll(bookmarks);
     }
 
     public long saveScript(long videoId, Script script) {

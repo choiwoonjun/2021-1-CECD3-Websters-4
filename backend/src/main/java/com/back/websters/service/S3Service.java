@@ -32,17 +32,31 @@ public class S3Service {
     private final ScriptMaker scriptMaker;
     private final FileUtils fileNameUtils;
 
-    public String uploadAndTranscribe(InputStream inputStream, ObjectMetadata objectMetadata, String fileName) {
+    public long uploadToS3(InputStream inputStream, ObjectMetadata objectMetadata, String fileName) {
         PutObjectRequest putObjectRequest = new PutObjectRequest(s3Component.getBucket(), fileName, inputStream, objectMetadata);
-        amazonS3Client.putObject(putObjectRequest);
-        return transcribe(fileName);
+        try {
+            // 확장자를 체크하여 지원하는 파일 형식인지 확인
+            MediaFormat fileExtension;
+            try {
+                fileExtension = MediaFormat.fromValue(fileNameUtils.getFileExtension(fileName).toLowerCase());
+            } catch (IllegalArgumentException e) {
+                throw new IllegalArgumentException("잘못된 형식의 파일입니다.");
+            }
+            if (fileExtension.equals(MediaFormat.UNKNOWN_TO_SDK_VERSION)) {
+                throw new IllegalArgumentException("지원하지 않는 파일 확장자입니다.");
+            }
+            amazonS3Client.putObject(putObjectRequest);
+            return dataService.saveVideo(fileName, getS3Uri(fileName));
+        } catch (Exception e) {
+            throw new IllegalArgumentException("S3 버킷에 저장 중 오류가 발생했습니다.");
+        }
     }
 
     private String getS3Uri(String fileName) {
         return "s3://" + s3Component.getBucket() + "/" + fileName;
     }
 
-    public String transcribe(String fileName) {
+    public String transcribe(String fileName, long videoId) {
         // 확장자를 체크하여 지원하는 파일 형식인지 확인
         MediaFormat fileExtension;
         try {
@@ -50,10 +64,6 @@ public class S3Service {
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("잘못된 형식의 파일입니다.");
         }
-        if (fileExtension.equals(MediaFormat.UNKNOWN_TO_SDK_VERSION)) {
-            throw new IllegalArgumentException("지원하지 않는 파일 확장자입니다.");
-        }
-        long videoId = dataService.saveVideo(fileName, getS3Uri(fileName));
 
         AwsCredentials credentials = AwsBasicCredentials.create(credentialsComponent.getAccessKey(), credentialsComponent.getSecretKey());
         AwsCredentialsProvider credentialsProvider = StaticCredentialsProvider.create(credentials);

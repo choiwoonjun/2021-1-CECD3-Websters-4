@@ -1,7 +1,6 @@
 package com.back.websters.service;
 
 import com.amazonaws.services.s3.model.ObjectMetadata;
-import com.back.websters.component.FilePathComponent;
 import com.back.websters.domain.bookmark.Bookmark;
 import com.back.websters.domain.script.Script;
 import com.back.websters.domain.video.Video;
@@ -22,18 +21,21 @@ public class FileService {
 
     private final S3Service s3Service;
     private final DataService dataService;
-    private final FilePathComponent filePathComponent;
-    private final FileUtils fileNameUtils;
+    private final FileUtils fileUtils;
 
-    public String transcribe(MultipartFile file) {
+    public long uploadToS3(MultipartFile file) {
         String fileName = file.getOriginalFilename();
         ObjectMetadata objectMetadata = new ObjectMetadata();
         objectMetadata.setContentLength(file.getSize());
         objectMetadata.setContentType(file.getContentType());
+
         try (InputStream inputStream = file.getInputStream()) {
-            return s3Service.uploadAndTranscribe(inputStream, objectMetadata, fileName);
+            return s3Service.uploadToS3(inputStream, objectMetadata, fileName);
         } catch (IOException e) {
-            throw new IllegalArgumentException("파일 변환 중 오류가 발생했습니다." + file.getOriginalFilename());
+            e.printStackTrace();
+            throw new IllegalArgumentException("파일 변환 중 오류가 발생했습니다. " + file.getOriginalFilename());
+        } catch (IllegalArgumentException e) {
+            throw e;
         }
     }
 
@@ -74,4 +76,13 @@ public class FileService {
         }
         return new JSONObject().put("results", bookmarks).toString();
     }
+
+    public String saveToLocal(MultipartFile file) {
+        return fileUtils.saveFile(file);
+    }
+
+    public void deleteByLocal(String filePath) {
+        fileUtils.deleteFile(filePath);
+    }
+
 }
