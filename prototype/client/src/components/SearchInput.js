@@ -9,6 +9,7 @@ const SearchInput = () => {
         size="20"
         className="cr-search-form__icon-search text-secondary"
       />
+      {/* Search */}
       <Input
         type="search"
         className="cr-search-form__input"

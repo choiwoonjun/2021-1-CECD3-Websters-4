@@ -28,14 +28,22 @@
     margin: 2rem auto;
     background-color: #F0FFFF;
 }
+.testvideo{
+    margin-left: 50vw; transform: translate(-50%); 
+}
+
+.meeting-slide{
+    border: solid;
+
+}
 .speech{
     color: black;
     margin: 2rem auto;
-    background-color: #F0FFFF;
+    font-size: 1.5rem;
+    background-color: white;
 }
 .speech:hover{
     color:blue;
-   
 }
 .meeting_log{
     cursor: pointer;
