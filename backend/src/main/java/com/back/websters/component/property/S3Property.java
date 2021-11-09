@@ -1,4 +1,4 @@
-package com.back.websters.component;
+package com.back.websters.component.property;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Setter
 @ConfigurationProperties(prefix = "cloud.aws.s3")
 @Component
-public class S3Component {
+public class S3Property {
 
     private String bucket;
 
