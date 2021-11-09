@@ -22,6 +22,8 @@ import {
   MdViewCarousel,
  // MdViewDay,
   MdViewList,
+  // MdOutlineSpaceDashboard,
+  MdTextSnippet,
   MdWeb,
   MdWidgets,
 } from 'react-icons/md';
@@ -37,7 +39,7 @@ import {
 import bn from 'utils/bemnames';
 
 const sidebarBackground = {
-  backgroundImage: `url("${sidebarBgImage}")`,
+  backgroundImage: `url("${""}")`,
   //background: 'secondaryColor',
   //backgroundSize: 'cover',
   //backgroundRepeat: 'no-repeat',
@@ -51,7 +53,7 @@ const navComponents = [
   //   exact: false,
   //   Icon: MdGroupWork,
   // },
-  { to: '/forms', name: 'forms', exact: false, Icon: MdChromeReaderMode },
+  // { to: '/forms', name: 'forms', exact: false, Icon: MdChromeReaderMode },
   // { to: '/input-groups', name: 'input groups', exact: false, Icon: MdViewList },
   // {
   //   to: '/dropdowns',
@@ -71,18 +73,26 @@ const navContents = [
 ];
 
 const pageContents = [
-  { to: '/login', name: 'login / signup', exact: false, Icon: MdAccountCircle },
-  {
-    to: '/login-modal',
-    name: 'login modal',
-    exact: false,
-    Icon: MdViewCarousel,
-  },
+  // Sign and Login
+  // { to: '/login', name: 'login / signup', exact: false, Icon: MdAccountCircle },
+  // {
+  //   to: '/login-modal',
+  //   name: 'login modal',
+  //   exact: false,
+  //   Icon: MdViewCarousel,
+  // },
 ];
 
 const navItems = [
-  { to: '/', name: 'dashboard', exact: true, Icon: MdDashboard },
-  // { to: '/cards', name: 'cards', exact: false, Icon: MdWeb },
+  { to: '/', name: '회의록', exact: true, Icon: MdDashboard},
+  { to: '/Folder', name: '회의록 폴더', exact: false, Icon: MdWeb },
+  {to: '/Editor', name:'회의록 에디터', exact: false, Icon: MdChromeReaderMode},
+  {to: '/UploadVideo', name:'회의록 업로드', exact :false, Icon:MdChromeReaderMode },
+
+
+
+
+
   // { to: '/charts', name: 'charts', exact: false, Icon: MdInsertChart },
   // { to: '/widgets', name: 'widgets', exact: false, Icon: MdWidgets },
 ];

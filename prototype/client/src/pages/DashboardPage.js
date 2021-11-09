@@ -32,43 +32,35 @@ class DashboardPage extends React.Component {
     const secondaryColor = getColor('secondary');
 
     return (
-      <Page
-        className="DashboardPage"
-        title="회의록"
-        breadcrumbs={[{ name: 'Dashboard', active: true }]}
-      >
-        <Row>
-          <Col lg="6" md="12" sm="12" xs="12">
-            <Card>
-              <CardHeader style={{}}>
-                생성된 회의록 <Label for="exampleDate" />
-              </CardHeader>
-
-              <MeetingLog />
-
-              <CardBody style={{ height: '100vh' }} />
-            </Card>
-          </Col>
-
-          <Col lg="6" md="12" sm="12" xs="12">
-            <Card>
-              {/* <Input type="date" name="date" id="date" placeholder="date" /> */}
-              <CardHeader>Shown Video</CardHeader>
-              <CardBody>
-                <div>Test Video</div>
-                <video
-                  id="meetingVideo"
-                  className="shown_video"
-                  src="./testVideo.mp4"
-                  controls
-                ></video>
-              </CardBody>
-
-              {}
-            </Card>
-          </Col>
-        </Row>
-      </Page>
+      // <Page
+      //   className="DashboardPage"
+      //   title="회의록"
+      //   breadcrumbs={[{ name: 'Dashboard', active: true }]}
+      // >
+      <div  className="editor-page">
+        <h3>회의록</h3>
+      
+      <div class="navbarr">
+        <a href="#home">Import</a>
+        <a href="#news">Edit</a>
+        <a href="#home">Setting</a>
+      </div>
+        <div>
+          <div className="testvideo">
+            Test Video
+            <video
+              id="meetingVideo"
+              className="shown_video"
+              src="./testVideo.mp4"
+              controls
+            ></video>
+          </div>
+          <div className="meeting-slide">
+            <MeetingLog />
+          </div>
+        </div>
+        </div>
+      // </Page>
     );
   }
 }

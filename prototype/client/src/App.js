@@ -17,11 +17,14 @@ const AuthModalPage = React.lazy(() => import('pages/AuthModalPage'));
 // const BadgePage = React.lazy(() => import('pages/BadgePage'));
 // const ButtonGroupPage = React.lazy(() => import('pages/ButtonGroupPage'));
 // const ButtonPage = React.lazy(() => import('pages/ButtonPage'));
-// const CardPage = React.lazy(() => import('pages/CardPage'));
+const FolderPage = React.lazy(() => import('pages/FolderPage'));
 // const ChartPage = React.lazy(() => import('pages/ChartPage'));
 const DashboardPage = React.lazy(() => import('pages/DashboardPage'));
 // const DropdownPage = React.lazy(() => import('pages/DropdownPage'));
 const FormPage = React.lazy(() => import('pages/FormPage'));
+{/* Added Editor */}
+const Editor = React.lazy(()=> import('pages/EditorPage'));
+const UploadVideoPage= React.lazy(()=> import('pages/UploadVideoPage'));
 // const InputGroupPage = React.lazy(() => import('pages/InputGroupPage'));
 // const ModalPage = React.lazy(() => import('pages/ModalPage'));
 // const ProgressPage = React.lazy(() => import('pages/ProgressPage'));
@@ -61,6 +64,11 @@ class App extends React.Component {
               <React.Suspense fallback={<PageSpinner />}>
                 <Route exact path="/" component={DashboardPage} />
                 <Route exact path="/login-modal" component={AuthModalPage} />
+                {/* Added New Page for 회의록 폴더 */}
+                <Route exact path="/uploadVideo" component={UploadVideoPage} />
+                <Route exact path="/folder" component={FolderPage} />
+                {/* Added Editor */}
+                <Route exact path="/editor" component={Editor} />
                 <Route exact path="/forms" component={FormPage} />
               </React.Suspense>
             </MainLayout>
