@@ -1,20 +1,22 @@
-package com.back.websters.utils;
+package com.back.websters.component.utils;
 
 import com.back.websters.domain.script.Script;
-import com.back.websters.service.DataService;
+import com.back.websters.domain.video.Video;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RequiredArgsConstructor
 @Component
 public class ScriptMaker {
 
-    private final DataService dataService;
-
-    public void convertJsonToScript(String scriptData, long videoId) throws JSONException {
+    public List<Script> convertJsonToScript(String scriptData, Video video) throws JSONException {
+        List<Script> scripts = new ArrayList<>();
 
         JSONObject jsonObject = new JSONObject(scriptData);
         JSONArray items = jsonObject.getJSONObject("results").getJSONArray("items");
@@ -27,13 +29,12 @@ public class ScriptMaker {
                 content += ".";
                 content = content.trim();
 
-                Script script = Script.builder()
+                scripts.add(Script.builder()
                         .startTime(startTime)
                         .endTime(endTime)
                         .content(content)
-                        .build();
-
-                dataService.saveScript(videoId, script);
+                        .video(video)
+                        .build());
 
                 startTime = "";
                 endTime = "";
@@ -46,6 +47,7 @@ public class ScriptMaker {
                 content += " " + item.getJSONArray("alternatives").getJSONObject(0).getString("content");
             }
         }
-
+        return scripts;
     }
+
 }

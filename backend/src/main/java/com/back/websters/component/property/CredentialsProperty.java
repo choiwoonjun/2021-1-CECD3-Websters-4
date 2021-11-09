@@ -1,4 +1,4 @@
-package com.back.websters.component;
+package com.back.websters.component.property;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,10 +7,10 @@ import org.springframework.stereotype.Component;
 
 @Getter
 @Setter
-@ConfigurationProperties(prefix = "file.upload")
+@ConfigurationProperties(prefix = "cloud.aws.credentials")
 @Component
-public class FilePathComponent {
+public class CredentialsProperty {
 
-    private String location;
-
+    private String accessKey;
+    private String secretKey;
 }

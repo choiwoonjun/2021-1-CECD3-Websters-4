@@ -1,4 +1,4 @@
-package com.back.websters.component;
+package com.back.websters.component.property;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,6 +9,6 @@ import org.springframework.stereotype.Component;
 @Setter
 @ConfigurationProperties(prefix = "bookmark.generator")
 @Component
-public class BoookmarkGeneratorPathComponent {
+public class BookmarkProperty {
     private String path;
 }
