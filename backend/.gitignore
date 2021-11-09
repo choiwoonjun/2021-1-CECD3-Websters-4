@@ -39,4 +39,4 @@ out/
 .idea/
 
 /src/main/resources/application.yml
-/src/main/resources/test.mp4
+/src/main/resources

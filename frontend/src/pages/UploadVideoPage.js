@@ -2,18 +2,24 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import axios from "axios";
+import videoAPI from '../apis/video'; 
 // import { Editor, EditorTools } from "@progress/kendo-react-editor";
 // import content from "./content-overview";
 import { RichTextEditor } from 'react-rte';
 import { CKEditor } from 'ckeditor4-react';
 import './style.scss';
+
 const UploadVideoPage = (props) => {
     const { width, height } = props;
     const inputRef = React.useRef();
     const [source, setSource]= React.useState();
+    const [video,setVideo]=React.useState();
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
+        console.log(file);
+        
+        setVideo(file)
         const url = URL.createObjectURL(file);
         setSource(url);
       };
@@ -21,28 +27,34 @@ const UploadVideoPage = (props) => {
   const handleChoose = (event) => {
     inputRef.current.click();
   };
-const handleUpload=(event) =>{
-    const file = event.target.files[0];
-    const url = URL.createObjectURL(file);
-    Upload(url);
-
-}
+  const handleUpload=(event) =>{
+      console.log(event.target);
+      console.log(source);
+      console.log(video);
+      
+      // const file = event.target.files[0];
+      // const url = URL.createObjectURL(file);
+      // Upload(url);
+      Upload(video)
+  }
   const Upload = (file) =>{
       try{
           console.log("Video Upload");
           const formData = new FormData();
           console.log(formData)
-          formData.append("filename",file)
+          formData.append("file",file)
           console.log(file)
           formData.append("destination","videos")
           formData.append("Create_Video",true)
           const config={headers:{"content-type":"multipart/form-data"}}
 
-          const API= "API";
-          const HOST="HOST";
-          const url=`${HOST}/${API}`;
+          // const API= "api/v1/video";
+          // const HOST="http://localhost:8080";
+          // const url=`${HOST}/${API}`;
+          // const result= axios.post(url, formData, config);
 
-          const result= axios.post(url, formData, config);
+          const result = videoAPI.upload(formData,config);
+
           console.log("Result",result);
       }catch(error){
           console.log(error);
