@@ -11,13 +11,14 @@ import React from 'react';
 import componentQueries from 'react-component-queries';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import './styles/reduction.scss';
+import "antd/dist/antd.css";
 
 // const AlertPage = React.lazy(() => import('pages/AlertPage'));
 const AuthModalPage = React.lazy(() => import('pages/AuthModalPage'));
 // const BadgePage = React.lazy(() => import('pages/BadgePage'));
 // const ButtonGroupPage = React.lazy(() => import('pages/ButtonGroupPage'));
 // const ButtonPage = React.lazy(() => import('pages/ButtonPage'));
-const FolderPage = React.lazy(() => import('pages/FolderPage'));
+const FolderPage2 = React.lazy(() => import('pages/FolderPage2'));
 // const ChartPage = React.lazy(() => import('pages/ChartPage'));
 const DashboardPage = React.lazy(() => import('pages/DashboardPage'));
 // const DropdownPage = React.lazy(() => import('pages/DropdownPage'));
@@ -66,7 +67,7 @@ class App extends React.Component {
                 <Route exact path="/login-modal" component={AuthModalPage} />
                 {/* Added New Page for 회의록 폴더 */}
                 <Route exact path="/uploadVideo" component={UploadVideoPage} />
-                <Route exact path="/folder" component={FolderPage} />
+                <Route exact path="/folder" component={FolderPage2} />
                 {/* Added Editor */}
                 <Route exact path="/editor" component={Editor} />
                 <Route exact path="/forms" component={FormPage} />
