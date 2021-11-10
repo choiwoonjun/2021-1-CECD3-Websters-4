@@ -19,6 +19,7 @@ public class Script {
     private String startTime;
     @Column(name = "END_TIME")
     private String endTime;
+    @Column(length = 1000)
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
