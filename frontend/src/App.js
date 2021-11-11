@@ -23,6 +23,10 @@ const FolderPage2 = React.lazy(() => import('pages/FolderPage2'));
 const DashboardPage = React.lazy(() => import('pages/DashboardPage'));
 // const DropdownPage = React.lazy(() => import('pages/DropdownPage'));
 const FormPage = React.lazy(() => import('pages/FormPage'));
+const VideoPage = React.lazy(() => import('pages/VideoPage/VideoPage'));
+
+
+
 {/* Added Editor */}
 const Editor = React.lazy(()=> import('pages/EditorPage'));
 const UploadVideoPage= React.lazy(()=> import('pages/UploadVideoPage'));
@@ -64,6 +68,7 @@ class App extends React.Component {
             <MainLayout breakpoint={this.props.breakpoint}>
               <React.Suspense fallback={<PageSpinner />}>
                 <Route exact path="/" component={DashboardPage} />
+                <Route exact path='/video/:videoName' component={VideoPage}></Route>
                 <Route exact path="/login-modal" component={AuthModalPage} />
                 {/* Added New Page for 회의록 폴더 */}
                 <Route exact path="/uploadVideo" component={UploadVideoPage} />

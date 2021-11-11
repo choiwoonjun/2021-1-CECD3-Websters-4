@@ -12,8 +12,15 @@ const videoAPI={
     getList:()=>{
         const url='/api/v1/videos'
         return axios.get(url)
-    }
-
+    },
+    getScripts:(videoName)=>{
+        const url=`/api/v1/scripts/${videoName}`
+        return axios.get(url)
+    },
+    getBookmarks:(videoName)=>{
+        const url=`/api/v1/bookmarks/${videoName}`
+        return axios.get(url)
+    },
     
 }
 

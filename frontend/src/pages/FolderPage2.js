@@ -25,16 +25,16 @@ function FolderPage2() {
       {
         title: '수정',
         className: 'column-money',
-        dataIndex: 'video_id',
+        dataIndex: 'video_name',
         align: 'center',
         width:100,
-        render:(id)=><a href={`/video/Editor/${id}`}>수정</a>
+        render:(video_name)=><a href={`/video/Editor/${video_name}`}>수정</a>
       },
       {
         title: '조회',
-        dataIndex: 'video_id',
+        dataIndex: 'video_name',
         align:'center',
-        render:(id)=><a href={`/video/${id}`}>조회</a>,
+        render:(video_name)=><a href={`/video/${video_name}`}>조회</a>,
         width:100
       },
     ];
