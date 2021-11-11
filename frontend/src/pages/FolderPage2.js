@@ -18,8 +18,8 @@ function FolderPage2() {
         dataIndex: 'video_name',
         render: text => <a>{text}</a>,
         align:'center',
-        columnWidth:100
-        ,width:500
+        columnWidth:100, 
+		width:100
         
       },
       {

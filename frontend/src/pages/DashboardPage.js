@@ -40,11 +40,11 @@ class DashboardPage extends React.Component {
       <div  className="editor-page">
         <h3>회의록</h3>
       
-      <div class="navbarr">
+      {/* <div class="navbarr">
         <a href="#home">Import</a>
         <a href="#news">Edit</a>
         <a href="#home">Setting</a>
-      </div>
+      </div> */}
         <div>
           <div className="testvideo">
             Test Video

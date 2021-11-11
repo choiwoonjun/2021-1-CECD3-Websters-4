@@ -1,5 +1,5 @@
 
-import * as React from 'react';
+import  React, { useState } from 'react';
 import * as ReactDOM from 'react-dom';
 import axios from "axios";
 import videoAPI from '../apis/video'; 
@@ -8,12 +8,16 @@ import videoAPI from '../apis/video';
 import { RichTextEditor } from 'react-rte';
 import { CKEditor } from 'ckeditor4-react';
 import './style.scss';
+import { Menu } from 'antd';
+import { UploadOutlined, ExportOutlined, SettingOutlined } from '@ant-design/icons';
+const { SubMenu } = Menu;
 
 const UploadVideoPage = (props) => {
     const { width, height } = props;
     const inputRef = React.useRef();
     const [source, setSource]= React.useState();
     const [video,setVideo]=React.useState();
+	const [current, setCurrent] = useState(false);
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
@@ -59,15 +63,41 @@ const UploadVideoPage = (props) => {
       }catch(error){
           console.log(error);
       }
+
+	
+	  function handleClick(){
+		  // console.log('click ', e);
+		  setCurrent(current)
+		};
   }
   return (
     <div className="video-page">
      <h3>Video Page</h3>
-     <div class="navbarr">
-        <a href="#home">Import</a>
-        <a href="#news">Edit</a>
-        <a href="#home">Setting</a>
-      </div>
+	 <div>
+		<Menu onClick={handleChoose} selectedKeys={[current]} mode="horizontal">
+        <Menu.Item key="mail" icon={<UploadOutlined />}>
+          Import
+        </Menu.Item>
+        <Menu.Item key="app" icon={<ExportOutlined />}>
+          Export
+        </Menu.Item>
+        <SubMenu key="SubMenu" icon={<SettingOutlined />} title="Settings">
+          <Menu.ItemGroup title="Item 1">
+            {/* <Menu.Item key="setting:1">Option 1</Menu.Item>
+            <Menu.Item key="setting:2">Option 2</Menu.Item> */}
+          </Menu.ItemGroup>
+          <Menu.ItemGroup title="Item 2">
+            {/* <Menu.Item key="setting:3">Option 3</Menu.Item>
+            <Menu.Item key="setting:4">Option 4</Menu.Item> */}
+          </Menu.ItemGroup>
+        </SubMenu>
+        <Menu.Item key="alipay">
+          {/* <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
+            Navigation Four - Link
+          </a> */}
+        </Menu.Item>
+      </Menu>
+		</div>
       <div className="VideoInput">
       <input
         ref={inputRef}
