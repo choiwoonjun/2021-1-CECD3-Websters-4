@@ -38,6 +38,9 @@ dependencies {
 	// test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.5'
 
+	//dev
+	implementation 'org.springframework.boot:spring-boot-devtools'
+
 }
 
 test {
