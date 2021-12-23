@@ -74,6 +74,7 @@ spring:
     password: [Your h2 database password]
   jpa:
     hibernate:
+      # 실제 사용에서는 schema.sql 파일을 작성하고 none 으로 변경
       ddl-auto: create
 
 file:
